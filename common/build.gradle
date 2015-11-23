@@ -19,16 +19,20 @@ clean{
 sourceSets {
   main {
     proto {
-        srcDir '../include'
+        srcDir 'include'
         exclude 'mesos/authentication/authentication.proto'
         exclude 'mesos/authorizer/authorizer.proto'
         exclude 'mesos/module/module.proto'
         exclude 'mesos/slave/oversubscription.proto'
     }
+    java {
+        srcDir 'src/generated/main/java'
+        srcDir 'src/main/java'
+    }
   }
   test {
     proto {
-        srcDir '../include'
+        srcDir 'include'
         exclude 'mesos/authentication/authentication.proto'
         exclude 'mesos/authorizer/authorizer.proto'
         exclude 'mesos/module/module.proto'
