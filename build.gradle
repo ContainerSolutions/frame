@@ -2,11 +2,6 @@ group 'com.containersolutions.mesos'
 version '0.1-SNAPSHOT'
 
 apply plugin: 'java'
-apply plugin: 'com.google.protobuf'
-
-ext {
-    protocVersion = '3.0.0-beta-1'
-}
 
 compileJava {
   sourceCompatibility = '1.8'
@@ -20,39 +15,4 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-sourceSets {
-  main {
-    proto {
-        srcDir 'include'
-        exclude 'mesos/authentication/authentication.proto'
-        exclude 'mesos/authorizer/authorizer.proto'
-        exclude 'mesos/module/module.proto'
-        exclude 'mesos/slave/oversubscription.proto'
-    }
-  }
-  test {
-    proto {
-      include 'include/mesos/scheduler/*.proto'
-    }
-  }
-}
 
-clean{
-    delete "$projectDir/src/generated"
-}
-
-protobuf {
-  protoc {
-    artifact = "com.google.protobuf:protoc:$protocVersion"
-    generatedFilesBaseDir = "common/src/generated"
-  }
-}
-
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.7.1'
-  }
-}

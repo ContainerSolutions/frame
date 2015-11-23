@@ -2,12 +2,58 @@ group 'com.containersolutions.mesos'
 version '0.1-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'com.google.protobuf'
+
+ext {
+    protocVersion = '3.0.0-beta-1'
+}
 
 repositories {
     mavenCentral()
 }
 
+clean{
+    delete "src/generated"
+}
+
+sourceSets {
+  main {
+    proto {
+        srcDir '../include'
+        exclude 'mesos/authentication/authentication.proto'
+        exclude 'mesos/authorizer/authorizer.proto'
+        exclude 'mesos/module/module.proto'
+        exclude 'mesos/slave/oversubscription.proto'
+    }
+  }
+  test {
+    proto {
+        srcDir '../include'
+        exclude 'mesos/authentication/authentication.proto'
+        exclude 'mesos/authorizer/authorizer.proto'
+        exclude 'mesos/module/module.proto'
+        exclude 'mesos/slave/oversubscription.proto'
+    }
+  }
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'com.google.protobuf', name: 'protobuf-java', version: protocVersion
+}
+
+protobuf {
+  protoc {
+    artifact = "com.google.protobuf:protoc:$protocVersion"
+    generatedFilesBaseDir = "common/src/generated"
+  }
+}
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.7.1'
+  }
 }
