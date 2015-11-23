@@ -1,2 +1,5 @@
 rootProject.name = 'frame'
+include 'scheduler'
+include 'executor'
+include 'common'
 
