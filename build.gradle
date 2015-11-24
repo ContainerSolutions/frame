@@ -1,4 +1,4 @@
-group 'com.containersolutions.mesos'
+group 'com.containersol.mesos'
 version '0.1-SNAPSHOT'
 
 apply plugin: 'java'
