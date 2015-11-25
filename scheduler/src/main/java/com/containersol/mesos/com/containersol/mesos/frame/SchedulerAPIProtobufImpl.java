@@ -17,7 +17,11 @@ package com.containersol.mesos.com.containersol.mesos.frame;
 
 import com.containersol.mesos.MesosAPIException;
 import com.containersol.mesos.SchedulerAPI;
+import com.containersol.mesos.model.FrameworkInfo;
 
+import org.apache.mesos.scheduler.Protos;
+
+import java.io.IOException;
 import java.io.OutputStream;
 
 
@@ -25,14 +29,20 @@ public class SchedulerAPIProtobufImpl implements SchedulerAPI {
 
     private OutputStream outputStream;
 
+
     public SchedulerAPIProtobufImpl(OutputStream outputStream) {
         super();
         this.outputStream = outputStream;
     }
 
     @Override
-    public void subscribe() throws MesosAPIException {
-
+    public void subscribe(FrameworkInfo frameworkInfo, boolean force) throws MesosAPIException {
+        try {
+            Protos.Call.Subscribe.newBuilder().setFrameworkInfo(org.apache.mesos.Protos.FrameworkInfo.getDefaultInstance().newBuilderForType()
+                    .setUser(frameworkInfo.getUser()).setName(frameworkInfo.getName())).setForce(force).build().writeTo(outputStream);
+        } catch (IOException e) {
+            throw new MesosAPIException("Failed to subscribe", e);
+        }
     }
 
     @Override

@@ -6,7 +6,10 @@ apply plugin: 'java'
 repositories {
     mavenCentral()
 }
-
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile project(':common')
+    compile group: 'com.google.protobuf', name: 'protobuf-java', version: protocVersion
+    compile group: 'com.googlecode.protobuf-rpc-pro', name: 'protobuf-rpc-pro-duplex', version: protobufProDumplexVersion
 }
+
