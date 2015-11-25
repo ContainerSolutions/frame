@@ -1,7 +1,12 @@
 group 'com.containersol.mesos'
 version '0.1-SNAPSHOT'
 
-apply plugin: 'java'
+apply plugin: 'java
+
+ext {
+    protocVersion = '3.0.0-beta-1'
+    protobufProDumplexVersion = '3.3.4'
+}
 
 compileJava {
   sourceCompatibility = '1.8'

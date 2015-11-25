@@ -4,10 +4,6 @@ version '0.1-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'com.google.protobuf'
 
-ext {
-    protocVersion = '3.0.0-beta-1'
-}
-
 repositories {
     mavenCentral()
 }
@@ -48,7 +44,7 @@ dependencies {
 
 protobuf {
   protoc {
-    artifact = "com.google.protobuf:protoc:$protocVersion"
+    artifact = "com.google.protobuf:protoc:${protocVersion}"
     generatedFilesBaseDir = "common/src/generated"
   }
 }
