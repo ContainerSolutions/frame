@@ -326,14 +326,18 @@ message Call {
   // Type of the call, indicates which optional field below should be
   // present if that type has a nested message definition.
   required Type type = 2;
+  extensions 3 to max;
 
-  optional Subscribe subscribe = 3;
-  optional Accept accept = 4;
-  optional Decline decline = 5;
-  optional Kill kill = 6;
-  optional Shutdown shutdown = 7;
-  optional Acknowledge acknowledge = 8;
-  optional Reconcile reconcile = 9;
-  optional Message message = 10;
-  optional Request request = 11;
+  extend Call {
+    optional Subscribe subscribe = 3;
+    optional Accept accept = 4;
+    optional Decline decline = 5;
+    optional Kill kill = 6;
+    optional Shutdown shutdown = 7;
+    optional Acknowledge acknowledge = 8;
+    optional Reconcile reconcile = 9;
+    optional Message message = 10;
+    optional Request request = 11;
+  }
 }
+

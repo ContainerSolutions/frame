@@ -1,0 +1,61 @@
+import "mesos/scheduler/scheduler.proto";
+import "mesos/mesos.proto";
+option java_generic_services = true;
+option java_package = "org.apache.mesos.scheduler";
+option java_outer_classname = "Scheduler";
+package mesos.scheduler;
+
+message Empty {}
+
+// Tears down the scheduler. When Mesos receives this request 
+// it will shut down all executors (and consequently kill tasks)
+//  and remove persistent volumes (if requested). It then removes
+// the framework and closes all open connections from this scheduler to the Master.
+message Teardown {
+  extend Call {
+    optional Teardown teardown = 21;
+  }
+  required FrameworkID framework_id = 1;
+}
+
+message Revive {
+  extend Call {
+    optional Revive revive = 22;
+  }
+  required FrameworkID framework_id = 1;
+}
+
+message Heartbeat {
+  extend Call {
+    optional Heartbeat heartbeat = 23;
+  }
+  required FrameworkID framework_id = 1;
+}
+
+
+service BlockingMesosService {
+    rpc subscribe(Call.Subscribe) returns (Event.Subscribed);
+    rpc tearDown(Teardown) returns (Empty);
+}
+
+service NonBlockingMesosService {
+    rpc accept(Call.Accept) returns (Empty);
+    rpc decline(Call.Decline) returns (Empty);
+    rpc revive(Revive) returns (Empty);
+    rpc shutdown(Call.Shutdown) returns (Empty);
+    rpc acknowledge(Call.Acknowledge) returns (Empty);
+    rpc reconcile(Call.Reconcile) returns (Empty);
+    rpc message(Call.Message) returns (Empty);
+    rpc request(Call.Request) returns (Empty);
+}
+
+service NonBlockingSchedulerService {
+    rpc onOffers(Event.Offers) returns (Empty);
+    rpc onRescind(Event.Rescind) returns (Empty);
+    rpc onUpdate(Event.Update) returns (Empty);
+    rpc onMessage(Event.Message) returns (Empty);
+    rpc onFailure(Event.Failure) returns (Empty);
+    rpc onError(Event.Error) returns (Empty);
+    rpc onHearbeat(Heartbeat) returns (Empty);
+}
+
