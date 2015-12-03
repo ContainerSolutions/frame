@@ -1,4 +1,4 @@
-package com.containersol.mesos.com.containersol.mesos.frame;
+package com.containersol.mesos;
 
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Message;

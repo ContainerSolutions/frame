@@ -11,5 +11,9 @@ dependencies {
     compile project(':common')
     compile group: 'com.google.protobuf', name: 'protobuf-java', version: protocVersion
     compile group: 'com.googlecode.protobuf-rpc-pro', name: 'protobuf-rpc-pro-duplex', version: protobufProDumplexVersion
+    compile group: 'com.google.http-client', name: 'google-http-client-protobuf', version: '1.21.0'
+    compile group: 'com.google.code.gson', name: 'gson',  version: '2.5'
+    compile group: 'io.netty', name: 'netty-all',  version: '4.0.3.Final'
+    //compile group: 'io.netty', name: 'netty-all',  version: '5.0.0.Alpha2'
 }
 

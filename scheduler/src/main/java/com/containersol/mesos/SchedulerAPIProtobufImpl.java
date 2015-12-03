@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-package com.containersol.mesos.com.containersol.mesos.frame;
+package com.containersol.mesos;
 
 import com.containersol.mesos.MesosAPIException;
 import com.containersol.mesos.SchedulerAPI;
